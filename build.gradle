@@ -1,0 +1,51 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'io.freefair.lombok' version '8.11'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 21
+targetCompatibility = 21
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+def playwrightVersion = '1.49.0'
+def cucumberJavaVersion = '7.20.1'
+def testngVersion = '7.10.2'
+def springBootTestVersion = '3.4.0'
+
+dependencies {
+    testImplementation("com.microsoft.playwright:playwright:${playwrightVersion}")
+    testImplementation("io.cucumber:cucumber-java:${cucumberJavaVersion}")
+    testImplementation("io.cucumber:cucumber-testng:${cucumberJavaVersion}")
+    testImplementation("io.cucumber:cucumber-spring:${cucumberJavaVersion}")
+    testImplementation("org.testng:testng:${testngVersion}")
+    testImplementation("org.springframework.boot:spring-boot-starter-test:${springBootTestVersion}")
+    testImplementation("org.springframework.boot:spring-boot-configuration-processor:${springBootTestVersion}")
+    testImplementation("org.json:json:20240303")
+}
+
+test {
+    useTestNG()
+    scanForTestClasses = false
+    systemProperty "cucumber.glue", "org.example.testplaywright"
+    def cucumberTags = System.getProperty('tags')
+    if (cucumberTags != null) {
+        systemProperty "cucumber.filter.tags", cucumberTags
+        println "Cucumber tags: ${cucumberTags}"
+    }
+    testLogging {
+        showStandardStreams = true
+    }
+    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+    println "Forks: ${maxParallelForks}"
+}

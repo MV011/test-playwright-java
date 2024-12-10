@@ -1,0 +1,11 @@
+api:
+  base-url: http://localhost:8000
+#  default-headers:
+#    Content-Type: application/json
+#    Accept: application/json
+  timeout: 5000
+browser:
+  base-url: http://localhost:5173
+  headless: false
+  type: chrome
+  timeout: 5000
