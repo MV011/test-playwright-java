@@ -7,10 +7,11 @@ import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.spring.ScenarioScope;
 import lombok.extern.slf4j.Slf4j;
-import org.example.testplaywright.client.PlaywrightApiClient;
-import org.example.testplaywright.config.ApiProperties;
-import org.example.testplaywright.config.BrowserProperties;
-import org.example.testplaywright.factory.PlaywrightBrowserFactory;
+import org.example.testplaywright.api.client.PlaywrightApiClient;
+import org.example.testplaywright.api.config.ApiProperties;
+import org.example.testplaywright.ui.config.BrowserProperties;
+import org.example.testplaywright.ui.factory.PlaywrightBrowserFactory;
+import org.example.testplaywright.ui.provider.BrowserContextProvider;
 import org.testng.SkipException;
 
 import java.nio.file.Paths;
@@ -20,13 +21,13 @@ import java.nio.file.Paths;
 @Slf4j
 public class Hooks {
 
-    private final PlaywrightBrowserFactory playwrightBrowserFactory;
+    private final BrowserContextProvider browserContextProvider;
     private final ApiProperties apiProperties;
     private final BrowserProperties browserProperties;
     private final PlaywrightApiClient playwrightApiClient;
 
-    public Hooks(PlaywrightBrowserFactory playwrightBrowserFactory, ApiProperties apiProperties, PlaywrightApiClient playwrightApiClient, BrowserProperties browserProperties) {
-        this.playwrightBrowserFactory = playwrightBrowserFactory;
+    public Hooks(BrowserContextProvider browserContextProvider, ApiProperties apiProperties, PlaywrightApiClient playwrightApiClient, BrowserProperties browserProperties) {
+        this.browserContextProvider = browserContextProvider;
         this.apiProperties = apiProperties;
         this.playwrightApiClient = playwrightApiClient;
         this.browserProperties = browserProperties;
@@ -40,8 +41,9 @@ public class Hooks {
 
     @Before(order = 1, value = "@UI")
     public void launchBrowser() {
-        Page page = playwrightBrowserFactory.init(browserProperties.getType());
-        page.navigate(browserProperties.getBaseUrl());
+        try (Page page = browserContextProvider.init()) {
+            page.navigate(browserProperties.getBaseUrl());
+        }
     }
 
     @Before(order = 1, value = "@API")
@@ -55,7 +57,7 @@ public class Hooks {
 
     @After(order = 1, value = "@UI")
     public void cleanupBrowser() {
-        playwrightBrowserFactory.cleanup();
+        browserContextProvider.cleanup();
     }
 
     @After(order = 1, value = "@API")
@@ -67,9 +69,9 @@ public class Hooks {
     public void takeScreenshotAndTrace(Scenario scenario) {
         if (scenario.isFailed()) {
             String screenshotName = scenario.getName().replaceAll("", "_");
-            byte[] sourcePath = playwrightBrowserFactory.getPage().screenshot();
+            byte[] sourcePath = browserContextProvider.getPage().screenshot();
             scenario.attach(sourcePath, "image/png", screenshotName);
-            playwrightBrowserFactory.getContext().tracing().stop(new Tracing.StopOptions().setPath(Paths.get("target/" + screenshotName + ".zip")));
+            browserContextProvider.getContext().tracing().stop(new Tracing.StopOptions().setPath(Paths.get("target/" + screenshotName + ".zip")));
         }
     }
 

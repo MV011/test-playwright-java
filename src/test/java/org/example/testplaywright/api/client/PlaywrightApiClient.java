@@ -1,4 +1,4 @@
-package org.example.testplaywright.client;
+package org.example.testplaywright.api.client;
 
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.RequestOptions;

@@ -1,4 +1,4 @@
-package org.example.testplaywright.config;
+package org.example.testplaywright.ui.config;
 
 import lombok.Getter;
 import lombok.Setter;

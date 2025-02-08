@@ -4,22 +4,22 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.example.testplaywright.context.ScenarioContext;
-import org.example.testplaywright.factory.PlaywrightBrowserFactory;
+import org.example.testplaywright.ui.factory.PlaywrightBrowserFactory;
 import org.example.testplaywright.pages.DashboardPage;
-import org.example.testplaywright.pages.LoginPage;
+import org.example.testplaywright.ui.provider.BrowserContextProvider;
 
 import static org.testng.Assert.assertTrue;
 
 public class UiDashboardSteps {
 
-    private final PlaywrightBrowserFactory playwrightBrowserFactory;
+    private final BrowserContextProvider browserContextProvider;
     private final ScenarioContext scenarioContext;
     private final DashboardPage dashboardPage;
 
-    public UiDashboardSteps(PlaywrightBrowserFactory playwrightBrowserFactory, ScenarioContext scenarioContext) {
-        this.playwrightBrowserFactory = playwrightBrowserFactory;
+    public UiDashboardSteps(BrowserContextProvider browserContextProvider, ScenarioContext scenarioContext) {
+        this.browserContextProvider = browserContextProvider;
         this.scenarioContext = scenarioContext;
-        this.dashboardPage = new DashboardPage(playwrightBrowserFactory.getPage());
+        this.dashboardPage = new DashboardPage(browserContextProvider.getPage());
     }
 
     @Then("I should be redirected to the dashboard")

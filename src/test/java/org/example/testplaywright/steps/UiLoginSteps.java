@@ -5,21 +5,22 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.example.testplaywright.context.ScenarioContext;
-import org.example.testplaywright.factory.PlaywrightBrowserFactory;
+import org.example.testplaywright.ui.factory.PlaywrightBrowserFactory;
 import org.example.testplaywright.pages.LoginPage;
+import org.example.testplaywright.ui.provider.BrowserContextProvider;
 
 import static org.testng.Assert.assertTrue;
 
 public class UiLoginSteps {
 
-    private final PlaywrightBrowserFactory playwrightBrowserFactory;
+    private final BrowserContextProvider browserContextProvider;
     private final ScenarioContext scenarioContext;
     private final LoginPage loginPage;
 
-    public UiLoginSteps(PlaywrightBrowserFactory playwrightBrowserFactory, ScenarioContext scenarioContext) {
-        this.playwrightBrowserFactory = playwrightBrowserFactory;
+    public UiLoginSteps(BrowserContextProvider browserContextProvider, ScenarioContext scenarioContext) {
+        this.browserContextProvider = browserContextProvider;
         this.scenarioContext = scenarioContext;
-        this.loginPage = new LoginPage(playwrightBrowserFactory.getPage());
+        this.loginPage = new LoginPage(browserContextProvider.getPage());
     }
 
     @Given("I am on the login page")

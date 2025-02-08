@@ -7,7 +7,7 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.spring.ScenarioScope;
-import org.example.testplaywright.client.PlaywrightApiClient;
+import org.example.testplaywright.api.client.PlaywrightApiClient;
 import org.example.testplaywright.context.ScenarioContext;
 import org.example.testplaywright.models.request.CreateUserRequest;
 import org.example.testplaywright.models.response.LoginResponse;
