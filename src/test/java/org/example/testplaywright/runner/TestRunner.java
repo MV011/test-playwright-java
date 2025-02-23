@@ -5,7 +5,6 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 import org.example.testplaywright.config.TestConfig;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
 import org.testng.annotations.DataProvider;
 
 @CucumberOptions(

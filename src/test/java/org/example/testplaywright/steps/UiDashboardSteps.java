@@ -3,14 +3,12 @@ package org.example.testplaywright.steps;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.spring.ScenarioScope;
 import org.example.testplaywright.context.ScenarioContext;
 import org.example.testplaywright.pages.DashboardPage;
 import org.example.testplaywright.ui.provider.BrowserContextProvider;
 
 import static org.testng.Assert.assertTrue;
 
-@ScenarioScope
 public class UiDashboardSteps {
 
     private final BrowserContextProvider browserContextProvider;

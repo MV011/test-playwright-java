@@ -6,22 +6,26 @@ Feature: Authentication
   So that I can access the test management system
 
   Scenario: Successful user registration
-    Given I am on the signup page
-    When I enter "test@example.com" as email
+    Given I am on the login page
+    And I click the Signup button
+    Then I am redirected to the sign up page
+    When I enter "test@example.com" as signup email
     And I enter "testuser" as username
-    And I enter "password123" as password
-    And I enter "password123" as confirm password
-    And I click the "Sign Up" button
+    And I enter "testpass123!" as password
+    And I confirm the password by entering "testpass123!"
+    And I submit the Signup form
     Then I should be redirected to the dashboard
     And I should see "Welcome, testuser" in the header
 
   Scenario: Failed registration with mismatched passwords
-    Given I am on the signup page
-    When I enter "test@example.com" as email
+    Given I am on the login page
+    And I click the Signup button
+    Then I am redirected to the sign up page
+    When I enter "test@example.com" as signup email
     And I enter "testuser" as username
     And I enter "password123" as password
-    And I enter "password456" as confirm password
-    And I click the "Sign Up" button
+    And I confirm the password by entering "password1235"
+    And I click the Signup button
     Then I should see an error message "Passwords do not match"
 
   Scenario: Successful login and logout

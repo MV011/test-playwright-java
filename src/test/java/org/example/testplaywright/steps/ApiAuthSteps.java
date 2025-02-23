@@ -6,7 +6,6 @@ import com.microsoft.playwright.options.RequestOptions;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
-import io.cucumber.spring.ScenarioScope;
 import org.example.testplaywright.api.client.PlaywrightApiClient;
 import org.example.testplaywright.context.ScenarioContext;
 import org.example.testplaywright.models.request.CreateUserRequest;
@@ -22,7 +21,6 @@ import java.util.Map;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-@ScenarioScope
 public class ApiAuthSteps {
 
     private final PlaywrightApiClient playwrightApiClient;

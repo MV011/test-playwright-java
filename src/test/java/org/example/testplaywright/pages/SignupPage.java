@@ -27,6 +27,7 @@ public class SignupPage {
     }
 
     public void fillUserName(String username) {
+        this.userName.fill(username);
     }
 
     public void fillEmail(String email) {
@@ -58,7 +59,6 @@ public class SignupPage {
     }
 
     public String getConfirmationText() {
-        // You can add code here to retrieve the confirmation text
         return "";
     }
 

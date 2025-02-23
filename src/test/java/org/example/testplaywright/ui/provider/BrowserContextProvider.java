@@ -100,6 +100,10 @@ public class BrowserContextProvider {
 
     @PreDestroy
     public void cleanup() {
+        if (currentPage != null) {
+            currentPage.close();
+            currentPage = null;
+        }
         if (context != null) {
             context.close();
             context = null;

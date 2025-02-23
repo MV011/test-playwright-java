@@ -12,12 +12,13 @@ import org.example.testplaywright.api.config.ApiProperties;
 import org.example.testplaywright.ui.config.BrowserProperties;
 import org.example.testplaywright.ui.factory.PlaywrightBrowserFactory;
 import org.example.testplaywright.ui.provider.BrowserContextProvider;
+import org.springframework.stereotype.Component;
 import org.testng.SkipException;
 
 import java.nio.file.Paths;
 
 
-@ScenarioScope
+//@ScenarioScope
 @Slf4j
 public class Hooks {
 
@@ -41,9 +42,8 @@ public class Hooks {
 
     @Before(order = 1, value = "@UI")
     public void launchBrowser() {
-        try (Page page = browserContextProvider.init()) {
-            page.navigate(browserProperties.getBaseUrl());
-        }
+        Page page = browserContextProvider.init();
+        page.navigate(browserProperties.getBaseUrl());
     }
 
     @Before(order = 1, value = "@API")
@@ -55,17 +55,12 @@ public class Hooks {
         );
     }
 
-    @After(order = 1, value = "@UI")
-    public void cleanupBrowser() {
-        browserContextProvider.cleanup();
-    }
-
     @After(order = 1, value = "@API")
     public void cleanupApi() {
         playwrightApiClient.cleanup();
     }
 
-    @After(order = 2, value= "@UI")
+    @After(order = 1, value= "@UI")
     public void takeScreenshotAndTrace(Scenario scenario) {
         if (scenario.isFailed()) {
             String screenshotName = scenario.getName().replaceAll("", "_");
@@ -73,6 +68,11 @@ public class Hooks {
             scenario.attach(sourcePath, "image/png", screenshotName);
             browserContextProvider.getContext().tracing().stop(new Tracing.StopOptions().setPath(Paths.get("target/" + screenshotName + ".zip")));
         }
+    }
+
+    @After(order = 2, value = "@UI")
+    public void cleanupBrowser() {
+        browserContextProvider.cleanup();
     }
 
 }

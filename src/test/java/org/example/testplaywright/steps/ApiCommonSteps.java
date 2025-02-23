@@ -6,7 +6,6 @@ import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.spring.ScenarioScope;
 import org.example.testplaywright.api.client.PlaywrightApiClient;
 import org.example.testplaywright.context.ScenarioContext;
 import org.example.testplaywright.enums.Method;
@@ -16,7 +15,6 @@ import org.example.testplaywright.utils.ApiUtils;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-@ScenarioScope
 public class ApiCommonSteps {
 
     @ParameterType("POST|GET|PUT|DELETE|PATCH")
