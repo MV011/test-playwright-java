@@ -5,7 +5,6 @@ Feature: Authentication
   I want to be able to sign up and login
   So that I can access the test management system
 
-  @Ignore
   Scenario: Successful user registration
     Given I am on the signup page
     When I enter "test@example.com" as email
@@ -15,8 +14,7 @@ Feature: Authentication
     And I click the "Sign Up" button
     Then I should be redirected to the dashboard
     And I should see "Welcome, testuser" in the header
-    
-  @Ignore
+
   Scenario: Failed registration with mismatched passwords
     Given I am on the signup page
     When I enter "test@example.com" as email

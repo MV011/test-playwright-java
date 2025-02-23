@@ -4,6 +4,7 @@ import com.microsoft.playwright.APIResponse;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.spring.ScenarioScope;
 import org.example.testplaywright.api.client.PlaywrightApiClient;
 import org.example.testplaywright.context.ScenarioContext;
 import org.example.testplaywright.models.request.CreateTestCaseRequest;
@@ -16,6 +17,7 @@ import org.testng.asserts.SoftAssert;
 import java.util.List;
 import java.util.Map;
 
+@ScenarioScope
 public class ApiTestManagementSteps {
 
     private final PlaywrightApiClient playwrightApiClient;

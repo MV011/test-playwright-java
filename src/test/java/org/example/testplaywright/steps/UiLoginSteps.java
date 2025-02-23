@@ -4,13 +4,14 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.spring.ScenarioScope;
 import org.example.testplaywright.context.ScenarioContext;
-import org.example.testplaywright.ui.factory.PlaywrightBrowserFactory;
 import org.example.testplaywright.pages.LoginPage;
 import org.example.testplaywright.ui.provider.BrowserContextProvider;
 
 import static org.testng.Assert.assertTrue;
 
+@ScenarioScope
 public class UiLoginSteps {
 
     private final BrowserContextProvider browserContextProvider;
