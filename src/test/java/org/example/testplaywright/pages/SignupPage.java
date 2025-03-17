@@ -58,8 +58,4 @@ public class SignupPage {
         return BrowserUtils.waitForLocatorToBeVisible(header) && header.innerText().equals("Create Account");
     }
 
-    public String getConfirmationText() {
-        return "";
-    }
-
 }

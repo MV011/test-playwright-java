@@ -1,12 +1,8 @@
 package org.example.testplaywright.ui.factory;
 
 import com.microsoft.playwright.*;
-import io.cucumber.spring.ScenarioScope;
-import jakarta.annotation.PreDestroy;
 import org.example.testplaywright.ui.config.BrowserProperties;
 import org.springframework.stereotype.Component;
-
-import java.nio.file.Paths;
 
 @Component
 public class PlaywrightBrowserFactory {

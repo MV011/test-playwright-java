@@ -5,20 +5,16 @@ import com.microsoft.playwright.Tracing;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
-import io.cucumber.spring.ScenarioScope;
 import lombok.extern.slf4j.Slf4j;
 import org.example.testplaywright.api.client.PlaywrightApiClient;
 import org.example.testplaywright.api.config.ApiProperties;
 import org.example.testplaywright.ui.config.BrowserProperties;
-import org.example.testplaywright.ui.factory.PlaywrightBrowserFactory;
 import org.example.testplaywright.ui.provider.BrowserContextProvider;
-import org.springframework.stereotype.Component;
 import org.testng.SkipException;
 
 import java.nio.file.Paths;
 
 
-//@ScenarioScope
 @Slf4j
 public class Hooks {
 
